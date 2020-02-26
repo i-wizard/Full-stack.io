@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% load static %}
+
+ 
+
+   {% block content%}
+   
+    
+
+    <br><div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 style="color:indianred">The result of your search:</h3>
+            </div>
+        </div>
+        <div class="row">
+            
+            {% for post in post_list%}
+            <div class="post col-xl-6">
+                <a href='{{post.get_absolute_url}}'><div class="post-thumbnail"><a href="{{post.get_absolute_url}}"><img src="{{post.thumbnail.url}}" alt="..." class="img-fluid"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    {% for cat in post.categories.all%}
+                    <div class="category"><a href="#" style="color:black">{{cat}}</a></div>
+                    {%endfor%}
+                  </div><a href="{{post.get_absolute_url}}">
+                    <h3 class="h4" style="color:rgb(60, 136, 184)">{{post.title}}</h3></a>
+                  <p class="text-muted">{{post.overview|truncatechars:80}}</p>
+                  <footer class="post-footer d-flex align-items-center"><a href="{{post.get_absolute_url}}" class="author d-flex align-items-center flex-wrap">
+                      <div class="avatar"><img src="{{post.author.profile_pic.url}}" alt="..." class="img-fluid"></div>
+                      <div class="title"><span>{{post.author.user.username}}</span></div></a>
+                    <div class="date"><i class="icon-clock"></i> {{post.timestamp|timesince}} ago</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>{{post.comment_count}}</div>
+                  </footer>
+                </div></a>
+              </div>
+              {% endfor %}
+        </div>
+    </div><br>
+   
+
+    
+
+   {%endblock content%}
