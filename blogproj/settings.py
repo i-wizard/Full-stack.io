@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,10 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'n+snutq*e!*p5j(jq9+9k4=iddj=(^!sflsm6(x7fujeeae6-v'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+(os.environ.get('DEBUG') =='True')
+#DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.43.95', '127.0.0.1']
+ALLOWED_HOSTS = ['fullstack-tech.herokuapp.com']
 
 
 # Application definition
@@ -172,3 +172,4 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+django_heroku.settings(locals())
